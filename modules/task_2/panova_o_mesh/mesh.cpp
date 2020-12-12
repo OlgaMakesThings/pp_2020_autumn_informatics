@@ -49,10 +49,11 @@ void SendRecvIntData(int s_buf, int ndims, int s_rank, int f_rank, int* f_buf) {
     MPI_Cart_coords(test_comm, s_rank, ndims, s_coords);
     int* f_coords = new int[ndims];
     MPI_Cart_coords(test_comm, f_rank, ndims, f_coords);
-    if (rank == s_rank)
+    if (rank == s_rank) {
         SendData(&s_buf, 1, MPI_INT, f_coords, test_comm);
-    else if (rank == f_rank)
+    } else if (rank == f_rank) {
         RecvData(&f_buf[0], 1, MPI_INT, s_coords, test_comm, &status);
+    }
 }
 void SendRecvDoubleData(double s_buf, int ndims, int s_rank, int f_rank, double* f_buf) {
     int rank = 0, size = 0;
@@ -64,8 +65,9 @@ void SendRecvDoubleData(double s_buf, int ndims, int s_rank, int f_rank, double*
     MPI_Cart_coords(test_comm, s_rank, ndims, s_coords);
     int* f_coords = new int[ndims];
     MPI_Cart_coords(test_comm, f_rank, ndims, f_coords);
-    if (rank == s_rank)
+    if (rank == s_rank) {
         SendData(&s_buf, 1, MPI_DOUBLE, f_coords, test_comm);
-    else if (rank == f_rank)
+    } else if (rank == f_rank) {
         RecvData(&f_buf[0], 1, MPI_DOUBLE, s_coords, test_comm, &status);
+    }
 }
